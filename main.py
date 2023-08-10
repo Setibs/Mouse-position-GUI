@@ -27,7 +27,6 @@ class MousePositionWindow(QMainWindow):
         # Establishes the window in the top right corner
         screen_resolution = QApplication.primaryScreen().availableGeometry()
         self.setGeometry(screen_resolution.width() - 224, 0, 224, 50)
-        print(screen_resolution)
 
         #Style the label
         self.mouse_position_label = QLabel(self)
