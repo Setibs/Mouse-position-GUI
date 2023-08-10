@@ -5617,3 +5617,4 @@ dist/main/tk/ttk/winTheme.tcl
 dist/main/tk/ttk/xpTheme.tcl
 raton.webp
 .idea/vcs.xml
+__pycache__/mainwindow.cpython-311.pyc
