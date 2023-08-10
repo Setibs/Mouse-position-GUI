@@ -6,29 +6,30 @@ import pyautogui
 from threading import Thread
 import time
 
-print(pyautogui.size())
-
 
 class MousePositionWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle("Posición del Ratón")
-
+        self.setWindowTitle("Mouse Position")
+        
+        #Sets the exit shortcut
         exit_action = QAction("Exit", self)
         exit_action.setShortcut(QKeySequence(Qt.CTRL | Qt.Key_Q))
         exit_action.triggered.connect(self.close)
         self.addAction(exit_action)
 
-        screen_resolution = QApplication.primaryScreen().availableGeometry()
+        #Style the window.
         self.setStyleSheet("QMainWindow{background-color: darkgray;"
                            "border: 1px solid black}")
         self.setWindowFlags(Qt.FramelessWindowHint)
 
-        # Establece la posición y el tamaño de la ventana
+        # Establishes the window in the top right corner
+        screen_resolution = QApplication.primaryScreen().availableGeometry()
         self.setGeometry(screen_resolution.width() - 224, 0, 224, 50)
         print(screen_resolution)
 
+        #Style the label
         self.mouse_position_label = QLabel(self)
         self.mouse_position_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.mouse_position_label.setStyleSheet(
@@ -41,13 +42,17 @@ class MousePositionWindow(QMainWindow):
         layout.addWidget(self.mouse_position_label)
 
         self.setLayout(layout)
+        
+        #Overlay any other window
         self.setWindowFlags(
             self.windowFlags() | Qt.WindowStaysOnTopHint)
-
+        
+        #Starts the updating thread
         self.update_thread = Thread(target=self.update_mouse_position)
         self.update_thread.daemon = True
         self.update_thread.start()
 
+        #Gets the window position
         self.old_pos = self.pos()
         self.show()
 
@@ -65,6 +70,7 @@ class MousePositionWindow(QMainWindow):
         self.old_pos = event.globalPosition()
 
     def mouseMoveEvent(self, event):
+        #Allows the window to be draggable
         delta = QPointF(event.globalPosition() - self.old_pos)
         self.move(self.x() + delta.x(), self.y() + delta.y())
         self.old_pos = event.globalPosition()
