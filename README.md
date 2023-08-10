@@ -5,7 +5,7 @@
 Simply run main.py or create an executable using the pyinstaller command "pyinstaller --windowed --onedir --icon=icon.ico main.py," and you're good to go.
 You can also use the --onefile argument, but please note that it might slow down startup.
 
-Once the application is running, you can close it from the taskbar or by using the ctrl+Q shortcut
+Once the application is running, you can close it from the taskbar or by using the ctrl+Q shortcut if you have the window selected.
 
 #### Example:
 ![Example](Example.jpg)
